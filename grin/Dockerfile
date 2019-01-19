@@ -24,3 +24,5 @@ USER grin
 WORKDIR /home/grin
 
 CMD ["grin"]
+
+EXPOSE 3413 3414 3415 3416
