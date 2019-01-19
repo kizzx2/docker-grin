@@ -1,6 +1,12 @@
 FROM ubuntu
 
-RUN apt-get update && apt-get install -y curl jq
+RUN apt-get update && apt-get install -y curl jq locales
+
+sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+  && dpkg-reconfigure --frontend=noninteractive locales \
+  && update-locale LANG=en_US.UTF-8
+
+ENV LANG en_US.UTF-8
 
 RUN cd /tmp \
   && curl -LO "$(curl https://api.github.com/repos/mimblewimble/grin/releases/latest | jq -r '.assets[] | select(.name | endswith("'"linux-amd64.tgz"'")) | .browser_download_url')" \
