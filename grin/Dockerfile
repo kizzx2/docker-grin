@@ -15,14 +15,6 @@ RUN apt-get remove -y curl jq \
   && apt-get autoclean -y \
   && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -ms /bin/bash grin \
-  && mkdir -p /home/grin \
-  && chown -R grin:grin /home/grin
-
-USER grin
-
-WORKDIR /home/grin
-
 CMD ["grin"]
 
 EXPOSE 3413 3414 3415 3416
